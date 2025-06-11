@@ -28,15 +28,6 @@ export default function Home() {
           xKnown.ai is a comprehensive ecosystem for capturing, processing, and monetizing voice data
           through a multi-layered architecture built with privacy and efficiency at its core.
         </p>
-
-        {/* 英雄区域 */}
-        <section className={styles.heroSection}>
-          <h2 className={styles.heroTitle}>UNLOCK THE VALUE OF EVERY CONVERSATION</h2>
-          <h2 className={styles.heroTitleAccent}>XKNOWN MAKES IT POSSIBLE.</h2>
-          <p className={styles.heroSubtitle}>
-            Our four-layer architecture seamlessly integrates hardware, AI, data services, and blockchain technology.
-          </p>
-        </section>
       </main>
 
       <Footer />
