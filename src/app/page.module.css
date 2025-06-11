@@ -30,8 +30,9 @@
 .main {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
 }
 
 .main ol {
@@ -164,5 +165,197 @@ a.secondary {
 @media (prefers-color-scheme: dark) {
   .logo {
     filter: invert();
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.logoContainer {
+  margin: 2rem 0;
+  transition: transform 0.3s ease;
+}
+
+.logoContainer:hover {
+  transform: scale(1.05);
+}
+
+.logo {
+  box-shadow: 0 10px 25px var(--shadow-color, rgba(0, 0, 0, 0.1));
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  text-align: center;
+  margin: 1rem 0;
+  background: linear-gradient(90deg, var(--accent-color), #7235de);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 英雄区域 */
+.heroSection {
+  text-align: center;
+  width: 100%;
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+  background: var(--hero-bg);
+  border-radius: 24px;
+  box-shadow: 0 8px 30px var(--shadow-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.heroSection:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px var(--shadow-color-hover);
+}
+
+.heroTitle {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.heroTitleAccent {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+
+.heroSubtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* 特性网格 */
+.widgetGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+/* 小组件样式 */
+.widget {
+  background-color: var(--widget-bg);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px var(--shadow-color);
+  padding: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+}
+
+.widget:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px var(--shadow-color-hover);
+}
+
+.widget.active {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px var(--shadow-color-hover);
+}
+
+/* 小组件头部 */
+.widgetHeader {
+  margin-bottom: 20px;
+}
+
+.widgetTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.widgetTitleAccent {
+  color: var(--accent-color);
+}
+
+.widgetDescription {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 小组件内容 */
+.widgetContent {
+  flex: 1;
+  margin-top: 15px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--card-bg);
+  padding: 15px;
+  border: 1px solid var(--border-color);
+}
+
+.screenshotImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.widget:hover .screenshotImage {
+  transform: scale(1.02);
+}
+
+/* 宽度调整 */
+.widgetLarge {
+  grid-column: 1 / -1;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .widgetGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .heroSection {
+    padding: 2rem 1rem;
+  }
+
+  .widget {
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion) {
+
+  .heroSection,
+  .widget,
+  .logoContainer,
+  .screenshotImage,
+  .downloadBtn {
+    transition: none;
+  }
+
+  .widget.active {
+    transform: none;
   }
 }
