@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import Navbar from "@/components/Navbar/Navbar";
 import TypewriterLogo from "@/components/TypewriterLogo/TypewriterLogo";
 import Footer from "@/components/Footer/Footer";
+import "@/styles/typography.css"; // 导入新创建的排版样式
 
 export default function Home() {
   return (
@@ -14,16 +15,16 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.logoContainer}>
           <TypewriterLogo
-            text="xKnown.ai"
+            text="XKNOWN.AI" // 修改为全大写以匹配SPACE10风格
             speed={120}
             pauseTime={2000}
-            autoRestart={true} // 确保自动重启
+            autoRestart={true}
             className={styles.logo}
           />
         </div>
 
         <h1 className={styles.title}>
-          The next generation of voice data collection and monetization
+          THE NEXT GENERATION OF VOICE DATA COLLECTION AND MONETIZATION
         </h1>
 
         <p className={styles.description}>
@@ -33,8 +34,8 @@ export default function Home() {
 
         {/* 英雄区域 */}
         <section className={styles.heroSection}>
-          <h2 className={styles.heroTitle}>Unlock the value of every conversation</h2>
-          <h2 className={styles.heroTitleAccent}>xKnown makes it possible.</h2>
+          <h2 className={styles.heroTitle}>UNLOCK THE VALUE OF EVERY CONVERSATION</h2>
+          <h2 className={styles.heroTitleAccent}>XKNOWN MAKES IT POSSIBLE.</h2>
           <p className={styles.heroSubtitle}>
             Our four-layer architecture seamlessly integrates hardware, AI, data services, and blockchain technology.
           </p>

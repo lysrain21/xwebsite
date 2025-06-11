@@ -14,10 +14,10 @@ export default function Footer() {
                     <Link href="/privacy">Privacy Policy</Link>
                 </div>
                 <div className={styles.socialLinks}>
-                    <Link href="https://x.com" aria-label="X (Twitter)">
+                    <Link href="/https://x.com/xKnownai" aria-label="X (Twitter)">
                         <Image src="/x.svg" alt="X" width={20} height={20} />
                     </Link>
-                    <Link href="https://t.me" aria-label="Telegram">
+                    <Link href="https://t.me/xknownai_announcements" aria-label="Telegram">
                         <Image src="/telegram.svg" alt="Telegram" width={20} height={20} />
                     </Link>
                 </div>
