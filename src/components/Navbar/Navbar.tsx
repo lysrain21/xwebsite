@@ -27,12 +27,11 @@ export default function Navbar() {
                 <Link href="/">xKnown.ai</Link>
             </div>
             <div className={styles.links}>
+                <Link href="/donate">$xKnown</Link>
                 <Link href="/docs">Docs</Link>
-                <Link href="/roadmap">Roadmap</Link>
-                <Link href="/donate">Donate</Link>
                 <Link href="/faq">FAQ</Link>
                 <ThemeToggle />
-                <a href="#" className={styles.downloadBtn}>Launch APP coming soon</a>
+                <a href="#" className={styles.downloadBtn}>Launch APP</a>
             </div>
         </nav>
     );
