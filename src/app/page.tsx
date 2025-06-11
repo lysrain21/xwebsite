@@ -1,14 +1,12 @@
 "use client";
-import Image from "next/image";
-import { useState } from "react";
+
+import React from "react";
 import styles from "./page.module.css";
 import Navbar from "@/components/Navbar/Navbar";
 import TypewriterLogo from "@/components/TypewriterLogo/TypewriterLogo";
 import Footer from "@/components/Footer/Footer";
 
 export default function Home() {
-  const [activeWidget, setActiveWidget] = useState<number | null>(null);
-
   return (
     <div className={styles.container}>
       <Navbar />
