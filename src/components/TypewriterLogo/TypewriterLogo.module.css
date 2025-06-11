@@ -1,44 +1,54 @@
 .typewriterContainer {
-    display: flex;
+    display: inline-block;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
-    width: 150px;
-    height: 150px;
-    border-radius: 12px;
+    background-color: transparent;
+    /* 移除白色背景 */
+    width: auto;
+    height: auto;
+    /* 移除固定高度 */
+    border-radius: 0;
+    /* 移除圆角 */
     cursor: pointer;
     user-select: none;
     position: relative;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: none;
+    /* 移除阴影 */
 }
 
 .textWrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    text-align: center;
+    position: static;
+    /* 改为静态定位 */
+    transform: none;
+    /* 移除transform */
+    width: auto;
+    text-align: left;
+    display: inline-flex;
+    align-items: center;
 }
 
 .text {
-    color: #000;
-    font-family: monospace, 'Courier New', Courier;
-    font-size: 1.2rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    /* 使用主题变量 */
+    font-family: inherit;
+    /* 使用继承的字体 */
+    font-size: inherit;
+    /* 使用继承的字体大小 */
+    font-weight: 600;
+    letter-spacing: 0.01em;
     white-space: nowrap;
 }
 
 .cursor {
     display: inline-block;
-    width: 6px;
-    height: 18px;
-    background-color: #888;
+    background-color: currentColor;
+    width: 2px;
+    height: 1em;
+    /* 匹配文本高度 */
+    margin-left: 1px;
+    animation: blink 1s step-end infinite;
     vertical-align: middle;
-    margin-left: 2px;
-    animation-duration: 0.8s;
-    animation-iteration-count: infinite;
+    /* 居中对齐 */
 }
 
 .cursor.blinking {
@@ -47,24 +57,23 @@
 
 @keyframes blink {
 
-    0%,
-    49% {
-        opacity: 0;
+    from,
+    to {
+        opacity: 1;
     }
 
-    50%,
-    100% {
-        opacity: 1;
+    50% {
+        opacity: 0;
     }
 }
 
 @media (max-width: 768px) {
     .typewriterContainer {
-        width: 120px;
-        height: 120px;
+        width: auto;
+        height: auto;
     }
 
     .text {
-        font-size: 0.95rem;
+        font-size: inherit;
     }
 }

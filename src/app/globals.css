@@ -1,3 +1,7 @@
+@import url('../styles/typography.css');
+
+/* 其他全局样式 */
+
 :root {
   /* Light mode variables */
   --background: #f5f5f7;

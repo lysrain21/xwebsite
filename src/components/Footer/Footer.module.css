@@ -1,69 +1,133 @@
 .footer {
-    background-color: var(--footer-bg);
-    color: var(--footer-text);
-    padding: 1.5rem;
+    position: relative;
     width: 100%;
+    padding: 0;
+    background-color: var(--background);
+    color: var(--text-primary);
+    overflow: hidden;
+}
+
+/* 大型Logo部分 */
+.logoSection {
+    position: relative;
+    width: 100%;
+    height: 25vh;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.bigLogo {
+    font-size: 20vw;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    opacity: 0.08;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    white-space: nowrap;
+    user-select: none;
+    position: absolute;
+    bottom: -10%;
+    line-height: 0.8;
+}
+
+/* 页脚内容部分 */
+.footerContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     position: relative;
     z-index: 2;
 }
 
-.footerContent {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-.copyright {
-    font-size: 0.875rem;
-    opacity: 0.8;
-}
-
-.footerLinks {
-    display: flex;
+/* 链接网格 */
+.linksGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 2rem;
+    padding: 3rem 0;
 }
 
-.footerLinks a {
-    color: var(--footer-text);
-    font-size: 0.875rem;
+.linksColumn h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+}
+
+.linksColumn ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.linksColumn li {
+    margin-bottom: 0.75rem;
+}
+
+.linksColumn a {
+    color: var(--text-secondary);
     text-decoration: none;
-    transition: opacity 0.2s;
-    opacity: 0.8;
+    transition: color 0.2s ease;
+    font-size: 0.9rem;
 }
 
-.footerLinks a:hover {
-    opacity: 1;
+.linksColumn a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
 }
 
-.socialLinks {
+/* 社交媒体图标 */
+.socialIcons {
     display: flex;
     gap: 1.5rem;
-    align-items: center;
+    margin: 2rem 0;
 }
 
-.socialLinks a {
-    display: flex;
-    align-items: center;
-    opacity: 0.8;
-    transition: opacity 0.2s;
+.socialIcons a {
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
 }
 
-.socialLinks a:hover {
-    opacity: 1;
+.socialIcons a:hover {
+    color: var(--accent-color);
 }
 
+/* 版权信息 */
+.copyright {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+/* 响应式调整 */
 @media (max-width: 768px) {
-    .footerContent {
-        flex-direction: column;
-        gap: 1.5rem;
+    .bigLogo {
+        font-size: 25vw;
     }
 
-    .footerLinks {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
+    .linksGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem 1rem;
+    }
+
+    .socialIcons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .logoSection {
+        min-height: 160px;
+    }
+
+    .bigLogo {
+        font-size: 20vw;
     }
 }

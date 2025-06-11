@@ -1,69 +1,306 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    width: 100%;
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 100;
-    background: var(--navbar-bg);
+    left: 0;
+    width: 100%;
+    background: var(--navbar-bg, var(--background));
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid transparent;
+    z-index: 1000;
     transition: all 0.3s ease;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .navbar.scrolled {
-    box-shadow: 0 2px 10px var(--shadow-color);
-    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: var(--navbar-scrolled-bg, var(--background-transparent));
 }
 
-.logo a {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    text-decoration: none;
+.navbarContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
-.links {
+.leftSection,
+.rightSection,
+.centerSection {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
 }
 
-.links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: color 0.2s ease;
+.centerSection {
+    flex-grow: 1;
+    justify-content: center;
 }
 
-.links a:hover {
-    color: var(--text-primary);
+/* Logo样式 */
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none !important;
+    margin-right: 2rem;
 }
 
-.downloadBtn {
-    background-color: var(--accent-color);
-    color: var(--button-text) !important;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+.navbarTypewriter {
     font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.01em;
+    color: var(--text-primary);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+/* 导航链接 */
+.navLinks ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2.5rem;
+}
+
+.navLinks li {
+    position: relative;
+}
+
+.navLinks a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    opacity: 0.85;
+}
+
+.navLinks a:hover {
+    opacity: 1;
+}
+
+/* 推出应用按钮 - 重新设计以确保在浅色模式下可见 */
+.launchAppButton {
+    background-color: #0a0a0a;
+    /* 深色背景确保在浅色模式下可见 */
+    color: #ffffff;
+    /* 白色文字在深色背景上清晰可见 */
+    border-radius: 100px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
     transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 1rem;
+    border: none;
 }
 
-.downloadBtn:hover {
-    background-color: var(--accent-color-hover);
+.launchAppButton:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px var(--shadow-color-hover);
+    background-color: #2a2a2a;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
-@media (max-width: 768px) {
-    .navbar {
-        padding: 1rem;
+/* 暗色模式下的按钮样式 - 可以使用不同的颜色 */
+@media (prefers-color-scheme: dark) {
+    .launchAppButton {
+        background-color: #ffffff;
+        /* 暗色模式下使用白色背景 */
+        color: #0a0a0a;
+        /* 暗色模式下使用黑色文字 */
     }
 
-    .links {
-        gap: 1rem;
+    .launchAppButton:hover {
+        background-color: #f0f0f0;
+    }
+}
+
+.themeToggleWrapper {
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+/* 汉堡菜单按钮 - 移动端 */
+.menuButton {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: 1rem;
+    z-index: 1001;
+}
+
+.menuButton span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    margin: 5px 0;
+    background-color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.menuButton.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menuButton.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.menuButton.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* 移动菜单 */
+.mobileMenu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--background);
+    z-index: 999;
+    padding-top: 5rem;
+}
+
+.mobileMenu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobileMenu li {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.mobileMenu a {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* 移动端按钮样式更新 */
+.mobileLaunchApp {
+    display: inline-block;
+    margin-top: 1rem;
+    background-color: #0a0a0a;
+    /* 深色背景 */
+    color: #ffffff !important;
+    /* 白色文字 */
+    border-radius: 100px;
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+    border: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .mobileLaunchApp {
+        background-color: #ffffff;
+        /* 暗色模式下使用白色背景 */
+        color: #0a0a0a !important;
+        /* 暗色模式下使用黑色文字 */
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .navLinks {
+        display: none;
+    }
+
+    .menuButton {
+        display: block;
+    }
+
+    .launchAppButton {
+        display: none;
+    }
+
+    .mobileMenu {
+        display: block;
+    }
+
+    .themeToggleWrapper {
+        margin-left: auto;
+    }
+}
+
+/* 超小屏幕适配 */
+@media (max-width: 380px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+
+    .logo {
+        font-size: 1rem;
+    }
+}
+
+/* 添加到现有CSS文件中 */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 90;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.navSocialIcons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* 增加图标之间的间距 */
+    margin-right: 2.5rem;
+    /* 增加整个图标组与其他元素的间距 */
+}
+
+.navSocialIcons a {
+    color: var(--text-primary);
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    /* 添加内边距使点击区域更大 */
+}
+
+/* 移动端样式 */
+@media (max-width: 768px) {
+    .navSocialIcons {
+        margin-right: 1rem;
+        /* 增加右侧间距 */
+        gap: 1.25rem;
+        /* 增加移动端图标间距 */
+    }
+
+    .navSocialIcons svg {
+        width: 18px;
+        height: 18px;
     }
 }

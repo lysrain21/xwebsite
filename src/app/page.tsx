@@ -3,7 +3,6 @@
 import React from "react";
 import styles from "./page.module.css";
 import Navbar from "@/components/Navbar/Navbar";
-import TypewriterLogo from "@/components/TypewriterLogo/TypewriterLogo";
 import Footer from "@/components/Footer/Footer";
 import "@/styles/typography.css"; // 导入新创建的排版样式
 
@@ -13,14 +12,12 @@ export default function Home() {
       <Navbar />
 
       <main className={styles.main}>
-        <div className={styles.logoContainer}>
-          <TypewriterLogo
-            text="XKNOWN.AI" // 修改为全大写以匹配SPACE10风格
-            speed={120}
-            pauseTime={2000}
-            autoRestart={true}
-            className={styles.logo}
-          />
+        {/* 修改垂直品牌标识 - 类似Anza网站 */}
+        <div className={styles.verticalBrandContainer}>
+          <div className={styles.verticalLine}></div>
+          <div className={styles.verticalBrand}>
+            XKNOWN
+          </div>
         </div>
 
         <h1 className={styles.title}>

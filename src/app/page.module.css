@@ -37,6 +37,11 @@
   overflow: hidden;
 }
 
+.container {
+  position: relative;
+  min-height: 100vh;
+}
+
 .container::before {
   content: '';
   position: absolute;
@@ -62,6 +67,13 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.main {
+  padding-top: 80px;
+  /* 根据您的导航栏高度调整，确保留出足够空间 */
+  position: relative;
+  z-index: 1;
 }
 
 .main ol {
@@ -237,6 +249,9 @@ a.secondary {
   max-width: 900px;
   text-align: center;
   margin: 2rem auto;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .heroTitle,
@@ -344,6 +359,44 @@ a.secondary {
   grid-column: 1 / -1;
 }
 
+/* 修改垂直品牌标识的样式 */
+.verticalBrandContainer {
+  position: absolute;
+  top: 120px;
+  left: 40px;
+  display: flex;
+  z-index: 5;
+}
+
+.verticalLine {
+  width: 0.5px;
+  height: 120px;
+  background-color: var(--text-primary);
+  margin-right: 15px;
+}
+
+/* 修改垂直品牌显示方式 */
+.verticalBrand {
+  writing-mode: vertical-lr;
+  /* 垂直显示文本 */
+  transform: rotate(180deg);
+  /* 旋转文本以正确方向显示 */
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.verticalBrand span {
+  line-height: 1.6;
+  /* 增加行高 */
+  font-size: 0.75rem;
+  /* 缩小字体 */
+  color: var(--text-primary);
+}
+
 /* 响应式调整 */
 @media (max-width: 768px) {
   .widgetGrid {
@@ -366,6 +419,23 @@ a.secondary {
   .heroTitle,
   .heroTitleAccent {
     font-size: 1.8rem;
+  }
+
+  .verticalBrandContainer {
+    top: 100px;
+    left: 20px;
+  }
+
+  .main {
+    padding-top: 70px;
+    /* 较小屏幕可能需要调整 */
+  }
+}
+
+@media (max-width: 480px) {
+  .verticalBrandContainer {
+    display: none;
+    /* 在非常小的屏幕上隐藏垂直标志 */
   }
 }
 
