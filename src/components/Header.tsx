@@ -13,14 +13,26 @@ export default function Header() {
     };
 
     useEffect(() => {
+        // 当菜单打开时，阻止页面滚动
         if (mobileMenuOpen) {
-            document.body.classList.add('menu-open');
+            document.body.style.overflow = 'hidden';
+            // 获取菜单高度并应用
+            const mobileNavElement = document.querySelector(`.${styles.mobileNav}`);
+            if (mobileNavElement) {
+                const contentHeight = mobileNavElement.scrollHeight;
+                (mobileNavElement as HTMLElement).style.height = `${contentHeight}px`;
+            }
         } else {
-            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+            // 重置高度为0
+            const mobileNavElement = document.querySelector(`.${styles.mobileNav}`);
+            if (mobileNavElement) {
+                (mobileNavElement as HTMLElement).style.height = '0';
+            }
         }
 
         return () => {
-            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
         };
     }, [mobileMenuOpen]);
 

@@ -190,7 +190,76 @@
 
 /* 默认隐藏移动导航菜单 */
 .mobileNav {
+    position: fixed;
+    top: 60px;
+    /* 与header高度保持一致 */
+    left: 0;
+    right: 0;
+    background-color: var(--bg-primary);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    /* 初始状态没有padding */
+    z-index: 1000;
+    height: 0;
+    /* 使用height而不是max-height和transform */
+    overflow: hidden;
+    transition: height 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+    /* Apple风格的过渡曲线 */
+    opacity: 1;
+    /* 保持不透明 */
     display: none;
+    /* 默认不显示 */
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.mobileNavOpen {
+    height: auto;
+    /* 而不是固定的max-height */
+    padding: 1rem 0;
+    /* 打开时添加padding */
+    display: block;
+    /* 显示菜单 */
+}
+
+.mobileNavLink {
+    display: block;
+    padding: 0.85rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    margin: 0;
+}
+
+.mobileNavLink:last-child {
+    border-bottom: none;
+}
+
+/* 增加一个针对移动端的键帧动画，确保菜单可见 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* 对iOS系统特殊处理 */
+@supports (-webkit-touch-callout: none) {
+    .mobileNavOpen {
+        animation: fadeIn 0.3s forwards;
+        max-height: 100vh !important;
+        /* 强制最大高度 */
+        height: auto !important;
+        padding: 1rem 0 !important;
+        display: block !important;
+        opacity: 1 !important;
+    }
 }
 
 /* 响应式设计 */
@@ -224,10 +293,14 @@
 @media (max-width: 768px) {
     .header {
         padding: 1rem 1.5rem;
+        height: 60px;
+        /* 固定高度 */
     }
 
     .left {
         width: auto;
+        justify-content: space-between;
+        flex: 1;
     }
 
     .nav {
@@ -238,7 +311,8 @@
     /* 添加汉堡菜单按钮 */
     .menuButton {
         display: flex;
-        margin-left: 1rem;
+        margin-left: 1.5rem;
+        padding: 0.5rem;
         cursor: pointer;
     }
 
@@ -251,39 +325,10 @@
         gap: 1rem;
     }
 
-    /* 移动导航菜单样式 */
+    /* 确保移动菜单在媒体查询中初始不显示但可见 */
     .mobileNav {
-        position: fixed;
-        top: 60px;
-        left: 0;
-        right: 0;
-        background-color: var(--bg-primary);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        padding: 1rem;
-        z-index: 1000;
-        transform: translateY(-100%);
-        opacity: 0;
-        transition: all 0.3s ease;
-        max-height: 0;
-        overflow: hidden;
-    }
-
-    .mobileNavOpen {
-        transform: translateY(0);
-        opacity: 1;
-        max-height: 300px;
-    }
-
-    .mobileNavLink {
         display: block;
-        padding: 1rem 0;
-        font-size: 1.1rem;
-        border-bottom: 1px solid var(--border-color);
-        text-align: center;
-    }
-
-    .mobileNavLink:last-child {
-        border-bottom: none;
+        height: 0;
     }
 
     /* 移动菜单增强样式 */
@@ -334,14 +379,32 @@
     }
 }
 
-/* 极小屏幕适配 */
+/* 针对极小屏幕进一步优化 */
 @media (max-width: 480px) {
     .header {
         padding: 0.8rem 1rem;
+        height: 56px;
+        /* 略小一点的header高度 */
     }
 
+    .mobileNav {
+        top: 56px;
+        /* 与header高度一致 */
+    }
+
+    /* 修正logo和按钮间距 */
     .logo {
         font-size: 1.1rem;
+    }
+
+    .menuButton {
+        margin-left: 1rem;
+    }
+
+    /* 确保菜单打开状态被正确应用 */
+    .mobileNavOpen {
+        display: block !important;
+        height: auto !important;
     }
 
     .socialLinks {
