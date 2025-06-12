@@ -12,7 +12,6 @@ export default function Home() {
           Voice data is scattered, unused, and undervalued. But it doesn&apos;t have to be.
           For the first time, you can upload, evaluate, and earn on a single intelligent agent layer.
         </p>
-        <button className={styles.ctaButton}>了解更多</button>
       </div>
     </div>
   );
