@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from './Header.module.css';
 import { useTheme } from '@/context/ThemeContext';
 
@@ -8,10 +8,15 @@ export default function Header() {
     const { theme, toggleTheme } = useTheme();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+    // 创建引用来跟踪菜单和菜单按钮
+    const menuButtonRef = useRef(null);
+    const mobileNavRef = useRef(null);
+
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen);
     };
 
+    // 处理菜单高度和页面滚动
     useEffect(() => {
         // 当菜单打开时，阻止页面滚动
         if (mobileMenuOpen) {
@@ -36,6 +41,34 @@ export default function Header() {
         };
     }, [mobileMenuOpen]);
 
+    // 添加点击外部关闭菜单功能
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (mobileMenuOpen) {
+                const menuButton = menuButtonRef.current;
+                const mobileNav = mobileNavRef.current;
+
+                // 检查点击是否在菜单按钮和菜单内容之外
+                if (
+                    menuButton &&
+                    mobileNav &&
+                    !(menuButton as Node).contains(event.target as Node) &&
+                    !(mobileNav as Node).contains(event.target as Node)
+                ) {
+                    setMobileMenuOpen(false);
+                }
+            }
+        };
+
+        // 添加全局点击事件监听器
+        document.addEventListener('click', handleClickOutside);
+
+        // 清理函数
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [mobileMenuOpen]);
+
     return (
         <header className={styles.header}>
             <div className={styles.left}>
@@ -45,9 +78,13 @@ export default function Header() {
                     <a href="#" className={styles.navLink}>$xKnown</a>
                 </nav>
                 <button
+                    ref={menuButtonRef}
                     className={styles.menuButton}
                     aria-label="Menu"
-                    onClick={toggleMobileMenu}
+                    onClick={(e) => {
+                        e.stopPropagation(); // 防止事件冒泡
+                        toggleMobileMenu();
+                    }}
                 >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3 12H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -93,8 +130,11 @@ export default function Header() {
                 <a href="#" className={styles.learnMoreButton}>Launch APP</a>
             </div>
 
-            {/* 移动导航菜单 - 增强版 */}
-            <div className={`${styles.mobileNav} ${mobileMenuOpen ? styles.mobileNavOpen : ''}`}>
+            {/* 移动导航菜单 - 增加ref引用 */}
+            <div
+                ref={mobileNavRef}
+                className={`${styles.mobileNav} ${mobileMenuOpen ? styles.mobileNavOpen : ''}`}
+            >
                 <a href="#" className={styles.mobileNavLink}>Docs</a>
                 <a href="#" className={styles.mobileNavLink}>$xKnown</a>
                 <a href="#" className={styles.mobileNavLink}>Launch APP</a>
@@ -115,8 +155,19 @@ export default function Header() {
 
                 {/* 主题切换 */}
                 <div className={styles.mobileThemeToggle}>
-                    <button onClick={toggleTheme} aria-label="Toggle theme">
-                        {theme === 'light' ? '切换到深色模式' : '切换到浅色模式'}
+                    <button onClick={toggleTheme} aria-label="Toggle theme" className={styles.mobileThemeButton}>
+                        {theme === 'light' ? (
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"
+                                    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        ) : (
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+                                    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        )}
                     </button>
                 </div>
             </div>
