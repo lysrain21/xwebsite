@@ -285,6 +285,53 @@
     .mobileNavLink:last-child {
         border-bottom: none;
     }
+
+    /* 移动菜单增强样式 */
+    .mobileSocialLinks {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+        padding: 1rem 0;
+    }
+
+    .mobileSocialLink {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.05);
+        color: var(--text-primary);
+        transition: all 0.2s ease;
+    }
+
+    [data-theme="dark"] .mobileSocialLink {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .mobileThemeToggle {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .mobileThemeToggle button {
+        background-color: var(--accent-color);
+        color: white;
+        padding: 0.7rem 1.5rem;
+        border-radius: 20px;
+        border: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        transition: all 0.2s ease;
+    }
+
+    .mobileThemeToggle button:active {
+        transform: scale(0.97);
+    }
 }
 
 /* 极小屏幕适配 */

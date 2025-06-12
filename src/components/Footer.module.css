@@ -63,24 +63,40 @@
     text-decoration: none;
 }
 
-/* 移动端页脚适配 */
+/* 更新页脚移动端适配 */
 @media (max-width: 768px) {
     .footer {
         flex-direction: column;
-        padding: 2rem 1.5rem;
-        gap: 2rem;
+        padding: 2.5rem 1.5rem;
+        gap: 2.5rem;
     }
 
     .left,
     .center,
     .right {
-        min-width: 100%;
-        justify-content: flex-start;
+        width: 100%;
+        align-items: center;
+        text-align: center;
     }
 
-    .right {
-        flex-direction: column;
+    .linkGroups {
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 2rem;
+    }
+
+    .linkGroup {
+        min-width: 40%;
+    }
+
+    .link {
+        font-size: 0.85rem;
+        padding: 0.5rem 0;
+    }
+
+    /* 确保最后一个页脚项目有足够的底部边距 */
+    .right {
+        margin-bottom: 1.5rem;
     }
 }
 
@@ -91,5 +107,12 @@
 
     .linkGroup {
         margin-bottom: 1rem;
+    }
+}
+
+/* 针对iPhone底部安全区域适配 */
+@supports (padding: max(0px)) {
+    .footer {
+        padding-bottom: max(2rem, env(safe-area-inset-bottom) + 1rem);
     }
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Header.module.css';
 import { useTheme } from '@/context/ThemeContext';
 
@@ -11,6 +11,18 @@ export default function Header() {
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen);
     };
+
+    useEffect(() => {
+        if (mobileMenuOpen) {
+            document.body.classList.add('menu-open');
+        } else {
+            document.body.classList.remove('menu-open');
+        }
+
+        return () => {
+            document.body.classList.remove('menu-open');
+        };
+    }, [mobileMenuOpen]);
 
     return (
         <header className={styles.header}>
@@ -69,10 +81,32 @@ export default function Header() {
                 <a href="#" className={styles.learnMoreButton}>Launch APP</a>
             </div>
 
-            {/* Mobile Navigation Menu */}
+            {/* 移动导航菜单 - 增强版 */}
             <div className={`${styles.mobileNav} ${mobileMenuOpen ? styles.mobileNavOpen : ''}`}>
                 <a href="#" className={styles.mobileNavLink}>Docs</a>
                 <a href="#" className={styles.mobileNavLink}>$xKnown</a>
+                <a href="#" className={styles.mobileNavLink}>Launch APP</a>
+
+                {/* 社交媒体链接 */}
+                <div className={styles.mobileSocialLinks}>
+                    <a href="https://x.com/xKnownai" target="_blank" rel="noopener noreferrer" className={styles.mobileSocialLink}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                    <a href="https://t.me/xknownai_announcements" target="_blank" rel="noopener noreferrer" className={styles.mobileSocialLink}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.265 2.428a2.048 2.048 0 0 0-2.078-.324L2.266 9.339a2.043 2.043 0 0 0 .104 3.818l3.625 1.261 2.03 6.502c.103.344.39.609.741.702a1.137 1.137 0 0 0 .909-.205l2.962-2.568 4.815 3.51a2.128 2.128 0 0 0 1.253.41c.904 0 1.733-.574 2.025-1.449l5.067-14.993a2.045 2.045 0 0 0-.53-1.899zM7.926 15.226l-.545 5.436L5.5 14.264l10.55-6.46-8.124 7.422zm9.85 5.149-5.566-4.048 9.121-8.332-3.555 12.38z" />
+                        </svg>
+                    </a>
+                </div>
+
+                {/* 主题切换 */}
+                <div className={styles.mobileThemeToggle}>
+                    <button onClick={toggleTheme} aria-label="Toggle theme">
+                        {theme === 'light' ? '切换到深色模式' : '切换到浅色模式'}
+                    </button>
+                </div>
             </div>
         </header>
     );
