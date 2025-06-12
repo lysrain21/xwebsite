@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import styles from './page.module.css';
 
 export default function Home() {
@@ -10,9 +9,10 @@ export default function Home() {
           VALUE HUMAN VOICE
         </h1>
         <p className={styles.subTitle}>
-          Voice data is scattered, unused, and undervalued. But it doesn't have to be.
+          Voice data is scattered, unused, and undervalued. But it doesn&apos;t have to be.
           For the first time, you can upload, evaluate, and earn on a single intelligent agent layer.
         </p>
+        <button className={styles.ctaButton}>了解更多</button>
       </div>
     </div>
   );
