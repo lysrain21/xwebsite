@@ -1,36 +1,19 @@
-"use client";
-
-import React from "react";
-import styles from "./page.module.css";
-import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
-import "@/styles/typography.css"; // 导入新创建的排版样式
+import Image from 'next/image';
+import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Navbar />
-
-      <main className={styles.main}>
-        {/* 修改垂直品牌标识 - 类似Anza网站 */}
-        <div className={styles.verticalBrandContainer}>
-          <div className={styles.verticalLine}></div>
-          <div className={styles.verticalBrand}>
-            XKNOWN
-          </div>
-        </div>
-
-        <h1 className={styles.title}>
-          THE NEXT GENERATION OF VOICE DATA COLLECTION AND MONETIZATION
+    <div className={styles.main}>
+      <div className={styles.heroContainer}>
+        <h1 className={styles.heroTitle}>
+          THE PROTOCOL TO<br />
+          VALUE HUMAN VOICE
         </h1>
-
-        <p className={styles.description}>
-          xKnown.ai is a comprehensive ecosystem for capturing, processing, and monetizing voice data
-          through a multi-layered architecture built with privacy and efficiency at its core.
+        <p className={styles.subTitle}>
+          Voice data is scattered, unused, and undervalued. But it doesn't have to be.
+          For the first time, you can upload, evaluate, and earn on a single intelligent agent layer.
         </p>
-      </main>
-
-      <Footer />
+      </div>
     </div>
   );
 }

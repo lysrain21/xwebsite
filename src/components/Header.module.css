@@ -1,0 +1,211 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    font-size: 14px;
+    background-color: var(--bg-primary);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    width: 33%;
+    gap: 2rem;
+}
+
+.logo {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navLink {
+    font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+}
+
+.navLink:hover {
+    color: var(--text-primary);
+}
+
+.navLink:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.2s ease;
+}
+
+.navLink:hover:after {
+    width: 100%;
+}
+
+.center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34%;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    width: 33%;
+}
+
+.controlGroup {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.menuButton,
+.dropbtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 0.5rem 0.8rem;
+    font-size: 14px;
+    color: #1d1d1f;
+    transition: all 0.2s ease;
+}
+
+.menuButton:hover,
+.dropbtn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.iconContainer {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.socialLinks {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    /* 增加社交图标之间的间距 */
+}
+
+.socialLink {
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.socialLink:hover {
+    color: var(--text-primary);
+}
+
+.themeToggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-primary);
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.themeToggle:hover {
+    background-color: var(--hover-bg);
+}
+
+.motto {
+    font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    display: none;
+    /* 在小屏幕上隐藏 */
+}
+
+.learnMoreButton {
+    font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    background-color: var(--accent-color);
+    color: var(--button-text);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.learnMoreButton:hover {
+    background-color: var(--accent-color-hover);
+    transform: translateY(-1px);
+}
+
+/* 响应式设计 */
+@media (min-width: 768px) {
+    .motto {
+        display: block;
+    }
+}
+
+@media (max-width: 670px) {
+    .right {
+        gap: 0.8rem;
+    }
+
+    .center {
+        width: auto;
+    }
+
+    .iconContainer {
+        gap: 1.8rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .iconContainer {
+        gap: 3rem;
+    }
+}
