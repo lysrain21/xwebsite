@@ -1,10 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import styles from './Header.module.css';
 import { useTheme } from '@/context/ThemeContext';
 
 export default function Header() {
     const { theme, toggleTheme } = useTheme();
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    const toggleMobileMenu = () => {
+        setMobileMenuOpen(!mobileMenuOpen);
+    };
 
     return (
         <header className={styles.header}>
@@ -14,7 +20,11 @@ export default function Header() {
                     <a href="#" className={styles.navLink}>Docs</a>
                     <a href="#" className={styles.navLink}>$xKnown</a>
                 </nav>
-                <button className={styles.menuButton} aria-label="菜单">
+                <button
+                    className={styles.menuButton}
+                    aria-label="Menu"
+                    onClick={toggleMobileMenu}
+                >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3 12H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                         <path d="M3 6H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -27,13 +37,11 @@ export default function Header() {
                 <div className={styles.iconContainer}>
                     <button className={styles.themeToggle} onClick={toggleTheme} aria-label="Toggle theme">
                         {theme === 'light' ? (
-                            // 月亮图标（暗色模式）
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"
                                     stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         ) : (
-                            // 太阳图标（亮色模式）
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
                                     stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -59,6 +67,12 @@ export default function Header() {
             <div className={styles.right}>
                 <p className={styles.motto}>Valuing Voice, Powering Ethical AI</p>
                 <a href="#" className={styles.learnMoreButton}>Launch APP</a>
+            </div>
+
+            {/* Mobile Navigation Menu */}
+            <div className={`${styles.mobileNav} ${mobileMenuOpen ? styles.mobileNavOpen : ''}`}>
+                <a href="#" className={styles.mobileNavLink}>Docs</a>
+                <a href="#" className={styles.mobileNavLink}>$xKnown</a>
             </div>
         </header>
     );

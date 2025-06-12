@@ -183,6 +183,16 @@
     transform: translateY(-1px);
 }
 
+/* 默认隐藏汉堡菜单按钮 */
+.menuButton {
+    display: none;
+}
+
+/* 默认隐藏移动导航菜单 */
+.mobileNav {
+    display: none;
+}
+
 /* 响应式设计 */
 @media (min-width: 768px) {
     .motto {
@@ -229,6 +239,7 @@
     .menuButton {
         display: flex;
         margin-left: 1rem;
+        cursor: pointer;
     }
 
     .center {
@@ -238,6 +249,41 @@
     .right {
         width: auto;
         gap: 1rem;
+    }
+
+    /* 移动导航菜单样式 */
+    .mobileNav {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: var(--bg-primary);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        z-index: 1000;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: all 0.3s ease;
+        max-height: 0;
+        overflow: hidden;
+    }
+
+    .mobileNavOpen {
+        transform: translateY(0);
+        opacity: 1;
+        max-height: 300px;
+    }
+
+    .mobileNavLink {
+        display: block;
+        padding: 1rem 0;
+        font-size: 1.1rem;
+        border-bottom: 1px solid var(--border-color);
+        text-align: center;
+    }
+
+    .mobileNavLink:last-child {
+        border-bottom: none;
     }
 }
 

@@ -182,7 +182,13 @@ textarea {
 
     main {
         margin-top: 60px;
-        /* 调整为较小的header高度 */
+        position: relative;
+        z-index: 1;
+    }
+
+    /* 当移动菜单打开时，防止页面滚动 */
+    body.menu-open {
+        overflow: hidden;
     }
 }
 
