@@ -209,3 +209,50 @@
         gap: 3rem;
     }
 }
+
+/* 移动端导航栏适配 */
+@media (max-width: 768px) {
+    .header {
+        padding: 1rem 1.5rem;
+    }
+
+    .left {
+        width: auto;
+    }
+
+    .nav {
+        display: none;
+        /* 在小屏幕上隐藏主导航 */
+    }
+
+    /* 添加汉堡菜单按钮 */
+    .menuButton {
+        display: flex;
+        margin-left: 1rem;
+    }
+
+    .center {
+        display: none;
+    }
+
+    .right {
+        width: auto;
+        gap: 1rem;
+    }
+}
+
+/* 极小屏幕适配 */
+@media (max-width: 480px) {
+    .header {
+        padding: 0.8rem 1rem;
+    }
+
+    .logo {
+        font-size: 1.1rem;
+    }
+
+    .socialLinks {
+        display: none;
+        /* 在极小屏幕上隐藏社交链接 */
+    }
+}

@@ -171,3 +171,42 @@ textarea {
 [data-theme="dark"] .card {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
+
+/* 移动端全局适配 */
+@media (max-width: 768px) {
+    :root {
+        --font-size-h0: 2rem;
+        --font-size-h1: 1.5rem;
+        --font-size-h2: 1.1rem;
+    }
+
+    main {
+        margin-top: 60px;
+        /* 调整为较小的header高度 */
+    }
+}
+
+/* 确保所有图片响应式 */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 优化点击区域 */
+button,
+a {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 适配安全区域（针对刘海屏和全面屏手机） */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: min(0vmin, env(safe-area-inset-left));
+        padding-right: min(0vmin, env(safe-area-inset-right));
+        padding-bottom: min(0vmin, env(safe-area-inset-bottom));
+    }
+}

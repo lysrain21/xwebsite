@@ -62,3 +62,34 @@
     color: #0071e3;
     text-decoration: none;
 }
+
+/* 移动端页脚适配 */
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        padding: 2rem 1.5rem;
+        gap: 2rem;
+    }
+
+    .left,
+    .center,
+    .right {
+        min-width: 100%;
+        justify-content: flex-start;
+    }
+
+    .right {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 1.5rem 1rem;
+    }
+
+    .linkGroup {
+        margin-bottom: 1rem;
+    }
+}
