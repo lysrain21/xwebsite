@@ -100,13 +100,22 @@
     cursor: pointer;
     padding: 0.5rem 0.8rem;
     font-size: 14px;
-    color: #1d1d1f;
+    color: var(--text-primary);
+    /* 使用CSS变量代替硬编码颜色 */
     transition: all 0.2s ease;
+}
+
+/* 暗色模式下的菜单按钮增强 */
+[data-theme="dark"] .menuButton {
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.1);
+    /* 增加微弱背景提升可见度 */
 }
 
 .menuButton:hover,
 .dropbtn:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--hover-bg);
+    /* 使用CSS变量替代硬编码 */
 }
 
 .iconContainer {
