@@ -32,7 +32,7 @@ export default function Footer() {
                     <a href="#" className={styles.link}>Contact Us</a>
                 </div>
                 <div className={styles.linkGroup}>
-                    <a href="#" className={styles.link}>Whitepaper</a>
+                    <a href="https://xknown-ai.gitbook.io/xknown.ai-docs/" className={styles.link}>Whitepaper</a>
                     <a href="https://x.com/xKnownai" className={styles.link}>Twitter</a>
                 </div>
             </div>

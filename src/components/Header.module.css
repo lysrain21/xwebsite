@@ -174,22 +174,64 @@
 
 .learnMoreButton {
     font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 500;
     background-color: var(--accent-color);
-    color: var(--button-text);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 980px;
+    /* 使用苹果标准的圆角 */
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: all 0.25s cubic-bezier(0.28, 0.11, 0.32, 1);
+    /* 苹果标准过渡曲线 */
     display: flex;
     align-items: center;
     white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 113, 227, 0.2);
+    /* 添加微妙阴影 */
+    position: relative;
+    /* 添加相对定位以支持伪元素 */
+    z-index: 1;
+    /* 确保内容在最上层 */
 }
 
+/* 悬停状态 */
 .learnMoreButton:hover {
     background-color: var(--accent-color-hover);
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+}
+
+/* 点击状态 - 修复文字消失问题 */
+.learnMoreButton:active {
+    color: white !important;
+    /* 强制保持文字颜色 */
+    transform: scale(0.97);
+    /* 轻微缩小而非向下移动 */
+    background-color: #0062c3;
+    /* 稍深色 */
+    box-shadow: 0 1px 4px rgba(0, 113, 227, 0.2);
+    transition: all 0.1s ease;
+    /* 点击时更快的过渡 */
+}
+
+/* 添加内部光晕效果 */
+.learnMoreButton::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%);
+    border-radius: 980px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    z-index: -1;
+}
+
+.learnMoreButton:hover::before {
+    opacity: 1;
 }
 
 /* 默认隐藏汉堡菜单按钮 */

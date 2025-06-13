@@ -74,8 +74,8 @@ export default function Header() {
             <div className={styles.left}>
                 <div className={styles.logo}>xKnown.ai</div>
                 <nav className={styles.nav}>
-                    <a href="#" className={styles.navLink}>Docs</a>
-                    <a href="#" className={styles.navLink}>$xKnown</a>
+                    <a href="https://xknown-ai.gitbook.io/xknown.ai-docs/" className={styles.navLink}>Docs</a>
+                    <a href="https://app.virtuals.io/geneses" className={styles.navLink}>$xKnown</a>
                 </nav>
                 <button
                     ref={menuButtonRef}
