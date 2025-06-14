@@ -11,6 +11,9 @@ export default function Home() {
 
   // 初始化主题
   useEffect(() => {
+    // 仅在客户端执行
+    if (typeof window === 'undefined') return;
+
     // 从localStorage获取保存的主题，或使用系统偏好
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -27,6 +30,9 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    // 仅在客户端执行
+    if (typeof window === 'undefined') return;
+
     // 页面加载动画触发
     setIsLoaded(true);
 
@@ -36,8 +42,16 @@ export default function Home() {
       setTimeout(() => {
         (el as HTMLElement).style.opacity = '1';
         (el as HTMLElement).style.transform = 'translateY(0)';
-      }, 100 * index);
+      }, 120 * index); // 稍微延长时间，使动画更加连贯
     });
+
+    // 添加初始动画类
+    document.body.classList.add(styles.pageLoaded);
+
+    // 移除加载类
+    setTimeout(() => {
+      document.body.classList.remove(styles.pageLoaded);
+    }, 1500);
   }, []);
 
   // 修改鼠标移动效果
@@ -45,7 +59,7 @@ export default function Home() {
     // 仅在客户端执行
     if (typeof window === 'undefined') return;
 
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       // 进一步降低敏感度，使效果更微妙
       const dampingFactor = 600;
 
