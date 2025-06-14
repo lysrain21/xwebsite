@@ -1,105 +1,381 @@
 .main {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    justify-content: space-between;
+    height: 100vh;
     padding: 0;
     margin: 0;
     position: relative;
     font-family: var(--font-regular);
     background-color: var(--bg-primary);
     transition: background-color 0.3s ease;
+    overflow: hidden;
 }
 
+/* Apple风格平滑渐变背景 */
+.audioWaveBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg,
+            var(--bg-gradient-1) 0%,
+            var(--bg-gradient-2) 50%,
+            var(--bg-gradient-3) 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    filter: blur(80px);
+    opacity: 0.7;
+    z-index: 0;
+    pointer-events: none;
+}
+
+[data-theme="dark"] .audioWaveBackground {
+    background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='soundPattern' patternUnits='userSpaceOnUse' width='120' height='120' patternTransform='scale(0.6) rotate(0)'%3E%3Crect x='0' y='0' width='100%25' height='100%25' fill='transparent'/%3E%3Cpath d='M30,40 L30,80 L70,80 L70,40 Z' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='90' cy='30' r='10' fill='rgba(255,255,255,0.03)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23soundPattern)'/%3E%3C/svg%3E");
+}
+
+/* 单页面容器 */
+.singlePageContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+    position: relative;
+}
+
+/* 导航栏 */
+.headerBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    width: 100%;
+    background-color: transparent;
+    border-bottom: 1px solid var(--border-color);
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 33%;
+}
+
+.logoText {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.logoText::before {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.7s ease;
+}
+
+.logoText:hover::before {
+    left: 100%;
+}
+
+.navLink {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+    margin-left: 1rem;
+}
+
+.navLink::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navLink:hover {
+    color: var(--text-primary);
+}
+
+.navLink:hover::after {
+    width: 100%;
+}
+
+.headerCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.socialLinks {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.socialLink {
+    color: var(--text-secondary);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.socialLink:hover {
+    transform: translateY(-3px);
+    opacity: 0.8;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    min-width: 33%;
+    justify-content: flex-end;
+}
+
+.motto {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin: 0;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+/* 主题切换按钮 */
+.themeToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.themeToggle:hover {
+    background-color: var(--hover-bg);
+    transform: scale(1.1) rotate(10deg);
+}
+
+.themeToggle svg {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.themeToggle:hover svg {
+    transform: rotate(30deg);
+}
+
+/* 主要内容区域 */
 .heroContainer {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0 16%;
-    min-height: 80vh;
-    margin-top: 5rem;
+    padding: 0 5%;
+    margin: 0;
 }
 
 .heroTitle {
-    font-size: var(--font-size-h0);
+    font-size: calc(var(--font-size-h0) * 0.85);
     font-weight: 600;
     text-align: center;
-    line-height: 1.3;
+    line-height: 1.2;
     letter-spacing: -0.02em;
     color: var(--text-primary);
     max-width: 45rem;
     background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: fadeIn 1s ease-out;
+    margin-bottom: 1rem;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+    transform-style: preserve-3d;
+    animation: subtleFloat 6s ease-in-out infinite;
 }
 
 .subTitle {
-    font-size: var(--font-size-h2);
+    font-size: calc(var(--font-size-h2) * 0.95);
     font-weight: 400;
     text-align: center;
     color: var(--text-secondary);
-    margin-top: 1.5rem;
     max-width: 30rem;
-    line-height: 1.5;
-    animation: fadeIn 1.5s ease-out;
+    line-height: 1.4;
+    animation: subtleFloat 8s ease-in-out infinite 1s;
 }
 
+/* 按钮样式 */
 .ctaButton {
-    margin-top: 2.5rem;
-    padding: 0.8rem 2rem;
+    padding: 0.6rem 1.8rem;
     background-color: var(--accent-color);
     color: var(--button-text);
     border-radius: 980px;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 500;
     border: none;
     cursor: pointer;
-    transition: all 0.2s ease;
-    animation: fadeIn 2s ease-out;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+}
+
+.ctaButton::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: rgba(255, 255, 255, 0.1);
+    transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
 }
 
 .ctaButton:hover {
-    background-color: var(--accent-color-hover);
-    transform: scale(1.02);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-.imageGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin: 4rem auto;
-    padding: 0 10%;
+.ctaButton:hover::after {
+    height: 100%;
+}
+
+.ctaButton:active {
+    transform: scale(0.98);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* 简化页脚 */
+.footerBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1.5rem;
     width: 100%;
-    max-width: 1200px;
+    background-color: transparent;
+    border-top: 1px solid var(--border-color);
+    flex-shrink: 0;
+    height: 50px;
 }
 
-.imageCard {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    background-color: var(--color-card);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.footerLeft {
+    display: flex;
+    align-items: center;
 }
 
-.imageCard:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+.footerRight {
+    display: flex;
+    align-items: center;
 }
 
-[data-theme="dark"] .imageCard {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+.copyright {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
 }
 
-[data-theme="dark"] .imageCard:hover {
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+.currentTheme {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
 }
 
+/* 响应式适配 */
+@media (max-width: 768px) {
+    .headerBar {
+        padding: 0.6rem 1rem;
+    }
+
+    .headerCenter {
+        display: none;
+    }
+
+    .motto {
+        display: none;
+    }
+
+    .navLink {
+        display: none;
+    }
+
+    .headerLeft {
+        min-width: auto;
+    }
+
+    .headerRight {
+        min-width: auto;
+    }
+
+    .heroTitle {
+        font-size: calc(var(--font-size-h0) * 0.65);
+    }
+
+    .subTitle {
+        font-size: calc(var(--font-size-h2) * 0.85);
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+
+    .currentTheme {
+        display: none;
+    }
+
+    .footerBar {
+        padding: 0.4rem 1rem;
+        justify-content: center;
+    }
+
+    .footerRight {
+        display: none;
+    }
+}
+
+@media (max-height: 650px) {
+    .heroTitle {
+        font-size: calc(var(--font-size-h0) * 0.55);
+        margin-bottom: 0.5rem;
+    }
+
+    .subTitle {
+        font-size: calc(var(--font-size-h2) * 0.8);
+        line-height: 1.3;
+    }
+
+    .headerBar {
+        height: 50px;
+    }
+
+    .footerBar {
+        height: 40px;
+    }
+}
+
+/* 基础淡入动画 */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(20px);
     }
 
     to {
@@ -108,79 +384,105 @@
     }
 }
 
-.contentSection {
+/* 波浪背景动画 */
+@keyframes waveAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Apple风格平滑渐变背景动画 */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+/* 淡入动画元素基础样式 */
+.fadeElement {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 加载状态类 */
+.loaded .headerBar {
+    animation: fadeIn 0.8s ease-out both;
+}
+
+.loaded .heroTitle {
+    animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+.loaded .subTitle {
+    animation: fadeIn 0.8s ease-out 0.4s both;
+}
+
+.loaded .footerBar {
+    animation: fadeIn 0.8s ease-out 0.6s both;
+}
+
+/* 主题过渡效果 */
+.themeTransition * {
+    transition: background-color 0.7s ease, color 0.7s ease, border-color 0.7s ease, box-shadow 0.7s ease !important;
+}
+
+/* Apple风格加载指示器 */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    padding: 6rem 16%;
-    background-color: var(--bg-secondary);
-    transition: background-color 0.3s ease;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-primary, #ffffff);
+    z-index: 9999;
 }
 
-.sectionContainer {
-    max-width: 800px;
-    margin: 0 auto;
+.loading::after {
+    content: "";
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-top-color: var(--accent-color, #0071e3);
+    animation: loadingSpinner 0.8s linear infinite;
 }
 
-.sectionTitle {
-    font-size: var(--font-size-h1);
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-    text-align: left;
-}
-
-.sectionText {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--text-secondary);
-}
-
-/* 移动端适配 */
-@media (max-width: 768px) {
-    .heroContainer {
-        padding: 0 6%;
-        min-height: 70vh;
-        margin-top: 3.5rem;
-    }
-
-    .heroTitle {
-        font-size: 2rem;
-        max-width: 100%;
-        line-height: 1.2;
-    }
-
-    .subTitle {
-        font-size: 1rem;
-        max-width: 100%;
-        padding: 0 1rem;
-    }
-
-    .ctaButton {
-        margin-top: 2rem;
-    }
-
-    .imageGrid {
-        grid-template-columns: 1fr;
-        padding: 0 5%;
-    }
-
-    .contentSection {
-        padding: 4rem 6%;
+@keyframes loadingSpinner {
+    to {
+        transform: rotate(360deg);
     }
 }
 
-@media (max-width: 480px) {
-    .heroContainer {
-        padding: 0 4%;
-        margin-top: 3rem;
+/* 添加浮动微妙动画到标题和副标题 */
+@keyframes subtleFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
     }
 
-    .heroTitle {
-        font-size: 1.8rem;
-    }
-
-    .subTitle {
-        font-size: 0.9rem;
-        padding: 0;
+    50% {
+        transform: translateY(-5px);
     }
 }
