@@ -6,7 +6,7 @@ export default function Home() {
   // 初始状态设为null以检测初始加载
   const [theme, setTheme] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  // 移除未使用的状态变量或在新动效中使用它们
   const [heroStyle, setHeroStyle] = useState({});
 
   // 初始化主题
@@ -166,7 +166,7 @@ export default function Home() {
             THE PROTOCOL TO<br />VALUE HUMAN VOICE
           </h1>
           <p className={`${styles.subTitle} fadeElement`}>
-            Voice data is scattered, unused, and undervalued. But it doesn't have to be.
+            Voice data is scattered, unused, and undervalued. But it doesn&apos;t have to be.
             For the first time, you can upload, evaluate, and earn on a single intelligent agent layer.
           </p>
         </div>
